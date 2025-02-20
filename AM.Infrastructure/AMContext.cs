@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AM.Infrastructure
 {
-    internal class AMContext: DbContext
+    public class AMContext: DbContext
     {
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
