@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AM.ApplicationCore.Domain;
+using AM.Infrastructure.Configuration;
+using AM.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace AM.Infrastructure
@@ -22,6 +24,29 @@ namespace AM.Infrastructure
                                         Initial Catalog=YoussefKefiDB;
                                         Integrated Security=true");
             base.OnConfiguring(optionsBuilder);
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //1ere methode
+            modelBuilder.ApplyConfiguration(new FlightConfiguration());
+
+            //2eme methode
+            //modelBuilder.Entity<Passenger>().OwnsOne(p => p.FullName,
+            //    full =>
+            //    {
+            //        full.Property(f => f.FirstName).HasColumnName("PassFirstName").HasMaxLength(30);
+            //        full.Property(f => f.LastName).HasColumnName("PassLastName").IsRequired();
+            //    }
+            //    );
+            modelBuilder.ApplyConfiguration(new PlaneConfiguration());
+            modelBuilder.ApplyConfiguration(new PassengerConfiguration());
+            modelBuilder.Entity<Traveller>().ToTable("Travellers");
+            modelBuilder.Entity<Staff>().ToTable("Staffs");
+        }
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<DateTime>()
+                .HaveColumnType("date");
         }
     }
 }

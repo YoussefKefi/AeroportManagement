@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -16,12 +17,15 @@ namespace AM.ApplicationCore.Domain
 		public float EstimatedDuration { get; set;}
 		public DateTime FlightDate { get; set;}
 		public int FlightId { get; set;}
-		public Plane MyPlane { get; set;} 
-		public ICollection<Passenger> ListPassengers { get; set;}
-		public override string ToString()
+		[ForeignKey("PlaneId")]
+		public int PlaneId { get; set;}
+		public Plane MyPlane { get; set;}
+        //public ICollection<Passenger> ListPassengers { get; set;}
+        public ICollection<Ticket> ListTickets { get; set; }
+        public override string ToString()
 		{
-			return "FlightId"+this.FlightId+"Destination="+this.Destination;
-		}
+            return $"FlightId: {FlightId}, Departure: {Departure}, Destination: {Destination}, EffectiveArrival: {EffectiveArrival}, EstimatedDuration: {EstimatedDuration}, FlightDate: {FlightDate}";
+        }
 	}
 }
 

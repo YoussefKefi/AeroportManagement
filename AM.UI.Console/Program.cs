@@ -25,16 +25,15 @@ class Program
 
         Plane plane4 = new Plane { };
         Console.WriteLine(plane4.ToString());
-        Passenger passenger = new Passenger { FirstName="Kefi",
-									        LastName="YOUSSEF",
-									        EmailAddress="youssef.kefi@esprit.tn"
-									        };
+        Passenger passenger = new Passenger {FullName = new FullName() { FirstName = "Kefi", LastName = "YOUSSEF" },EmailAddress="youssef.kefi@esprit.tn"};
         Console.WriteLine(passenger.ToString());
         Console.WriteLine(passenger.CheckProfile("Kefi","Youssef"));
         Console.WriteLine(passenger.CheckProfile("Kefi","Yassine"));
         Console.WriteLine(passenger.CheckProfile("Kefi","Youssef","youssef.kefi@esprit.tn"));
-        Staff staff1 = new Staff {FirstName="StaffName", LastName="LastNameStaff"};
-        Traveller traveller1 = new Traveller {Nationality="Tunisian", FirstName="FirstNameTraveller"};
+        Staff staff1 = new Staff {FullName = new FullName() { FirstName = "StaffName", LastName = "LastNameStaff" } };
+        Traveller traveller1 = new Traveller {Nationality="Tunisian",
+            FullName = new FullName() { FirstName = "FirstNameTraveller" }
+        };
         passenger.PassengerType();
         staff1.PassengerType();
         traveller1.PassengerType();
@@ -64,10 +63,10 @@ class Program
             Console.WriteLine(item);
         }
         Console.WriteLine("-----------------------question 14-----------------------");
-        foreach (var item in flightMethods.SeniorTravellers(TestData.flight1))
-        {
-            Console.WriteLine(item);
-        }
+        //foreach (var item in flightMethods.SeniorTravellers(TestData.flight1))
+        //{
+        //    Console.WriteLine(item);
+        //}
         Console.WriteLine("-----------------------question 15-----------------------");
         flightMethods.DestinationGroupedFlights();
         Console.WriteLine("-----------------------question 16/17-----------------------");

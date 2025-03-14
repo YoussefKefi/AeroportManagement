@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,17 +9,24 @@ namespace AM.ApplicationCore.Domain
 {
 	public class Passenger
 	{
-		public int Passengerid { get; set; }
-		public DateTime BirthDate{ get; set;}
-		public String EmailAddress { get; set;}
-		public String FirstName { get; set;}
-		public String LastName { get; set;}
-		public String PassportNumber{ get; set;}
-		public String TelNumber { get; set;}
-		public ICollection<Flight> Flights { get; set;}
-		public override string ToString()
+		//public int Passengerid { get; set; }
+		[Display(Name = "Date de birth")]
+		[DataType(DataType.DateTime)]
+        public DateTime BirthDate{ get; set;}
+		[DataType(DataType.EmailAddress)]
+        public String EmailAddress { get; set;}
+		public FullName FullName { get; set;}
+		[Key]
+		[StringLength(7)]
+        public String PassportNumber{ get; set;}
+		[RegularExpression(@"^[0-9]{8}$", ErrorMessage = "le numero de telephone doit contenir 8 chiffres")]
+        public String TelNumber { get; set;}
+        //public ICollection<Flight> Flights { get; set;}
+        public ICollection<Ticket> ListTickets { get; set; }
+
+        public override string ToString()
 		{
-			return "FirstName"+this.FirstName+"LastName="+this.LastName;
+			return "FirstName"+this.FullName.FirstName+"LastName="+this.FullName.LastName;
 		}
 	        //public bool CheckProfile(string Firstname, String Lastname, String email)
         //{
@@ -35,11 +43,11 @@ namespace AM.ApplicationCore.Domain
 		{
 			if ( Email == null) 
 			{
-				return this.FirstName == FirstName && this.LastName == LastName;
+				return this.FullName.FirstName == FirstName && this.FullName.LastName == LastName;
 			 }
 			else
 			{
-				return this.FirstName == FirstName && this.LastName == LastName && this.EmailAddress == Email;
+				return this.FullName.FirstName == FirstName && this.FullName.LastName == LastName && this.EmailAddress == Email;
 			}
 		}
 		public virtual void PassengerType ()
