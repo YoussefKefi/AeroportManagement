@@ -83,8 +83,10 @@ class Program
         //test atelier 3
 
         AMContext context=new AMContext();
-        context.Flights.Add(TestData.flight2);
-        context.SaveChanges();
+        //context.Flights.Add(TestData.flight2);
+        //context.SaveChanges();
+
+        Console.WriteLine(context.Flights.First().MyPlane.Capacity);
     }
 }
 

@@ -22,7 +22,7 @@ namespace AM.ApplicationCore.Domain
 		[RegularExpression(@"^[0-9]{8}$", ErrorMessage = "le numero de telephone doit contenir 8 chiffres")]
         public String TelNumber { get; set;}
         //public ICollection<Flight> Flights { get; set;}
-        public ICollection<Ticket> ListTickets { get; set; }
+        public virtual ICollection<Ticket> ListTickets { get; set; }
 
         public override string ToString()
 		{
