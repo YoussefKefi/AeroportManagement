@@ -42,6 +42,7 @@ namespace AM.Infrastructure
             modelBuilder.ApplyConfiguration(new PassengerConfiguration());
             modelBuilder.Entity<Traveller>().ToTable("Travellers");
             modelBuilder.Entity<Staff>().ToTable("Staffs");
+            modelBuilder.ApplyConfiguration(new TicketConfiguration());
         }
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
