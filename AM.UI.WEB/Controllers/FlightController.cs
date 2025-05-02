@@ -12,12 +12,22 @@ namespace AM.UI.WEB.Controllers
                 _flightService = flightService;
             }
 
-            // GET: FlightController
-            public ActionResult Index()
+
+
+        // GET: FlightController
+        public ActionResult Index(DateTime? dateDepart)
         {
-            return View(_flightService.GetAll().ToList()); ;
+            if (dateDepart == null)
+                return View(_flightService.GetAll().ToList());
+            else
+                return
+                View(_flightService.GetMany(f => f.FlightDate.Date.Equals(dateDepart)).ToList());
         }
 
+        public ActionResult Sort()
+        {
+            return View("Index", _flightService.SortFlights());
+        }
         // GET: FlightController/Details/5
         public ActionResult Details(int id)
         {
